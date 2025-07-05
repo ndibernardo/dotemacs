@@ -1,0 +1,16 @@
+.cache
+.dap*
+.mc*
+.DS_STORE
+.lsp-session-v1
+auto-save-list
+backups
+eln-cache
+elpa
+eshell
+history
+ido.last
+projects
+smex-items
+straight
+transient
