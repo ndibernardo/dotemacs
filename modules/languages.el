@@ -39,6 +39,8 @@
               ("<C-s-return>" . cider-eval-buffer)
               ("<M-.>"        . cider-find-var)))
 
+(use-package flycheck-clj-kondo)
+
 (use-package rust-mode
   :defer t
   :mode (("\\.rs\\'"  . rust-mode))
@@ -49,6 +51,12 @@
   (inferior-lisp-program "sbcl")
   :config
   (load (expand-file-name "~/.quicklisp/slime-helper.el")))
+
+(use-package protobuf-mode
+  :mode (("\\.proto\\'" . protobuf-mode)))
+
+(use-package dockerfile-mode
+  :mode (("Dockerfile\\'" . dockerfile-mode)))
 
 (provide 'languages)
 ;;; languages.el ends here

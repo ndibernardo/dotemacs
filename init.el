@@ -7,6 +7,11 @@
 (add-to-list 'load-path (expand-file-name "modules" user-emacs-directory))
 
 (require 'lib)
+
+;; Set up library paths for native compilation on macOS.
+(when (eq system-type 'darwin)
+  (setup-macos-native-comp-library-paths))
+
 (require 'packages)
 (require 'gc)
 (require 'ui)
@@ -14,5 +19,4 @@
 (require 'editing)
 (require 'development)
 (require 'languages)
-
 ;;; init.el ends here

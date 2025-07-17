@@ -42,9 +42,8 @@
   (setq frame-title-format '("%b"))
   (setq ns-use-proxy-icon nil)
   ;;(push '(ns-appearance . dark) default-frame-alist)
-  ;;(push '(ns-transparent-titlebar . t) default-frame-alist)
-  )
-
+  ;;(push '(ns-transparent-titlebar . t) default-frame-alist))
+)
 ;; Set UTF-8 encoding
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -72,13 +71,12 @@
 ;; Write customizations in 'custom.el' file
 (setq custom-file (locate-user-emacs-file "custom.el"))
 
-(setq comp-deferred-compilation nil)
-
 ;; Less noise when compiling elisp
 (setq byte-compile-warnings '(not free-vars unresolved noruntime lexical make-local))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq load-prefer-newer t)
-(setq native-comp-enable-subr-trampolines nil)
 (setq package-enable-at-startup nil)
+(setq native-comp-async-jobs-number (max 1 (/ (num-processors) 2)))
+(setq native-comp-speed 1)
 
 ;;; early-init.el ends here

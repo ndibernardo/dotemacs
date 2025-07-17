@@ -17,8 +17,6 @@
        display-buffer-below-selected)
       (window-height . 20))))
   (display-line-numbers-width 3)
-  (modus-themes-bold-constructs nil)
-  (modus-themes-italic-constructs nil)
   (split-height-threshold 80)
   (temp-buffer-max-height 15)
   (temp-buffer-resize-mode t)
@@ -28,32 +26,24 @@
   (column-number-mode 1)
   (show-paren-mode 1)
   (window-divider-mode 1)
-  (menu-bar-mode 0)
-  (fringe-mode 0)
+  (menu-bar-mode 1)
+  (fringe-mode '(10 . 10))
+  (global-display-line-numbers-mode 1)
   (setq-default fill-column 100)
 
-  (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :weight 'normal :height 130)
-  (require-theme 'modus-themes)
-  (setq modus-themes-common-palette-overrides
-        modus-themes-preset-overrides-faint)
-  (load-theme 'modus-operandi t)
-
-  (custom-set-faces
-   '(mode-line ((t (:box nil))))
-   '(mode-line-active ((t (:box nil))))
-   '(mode-line-inactive ((t (:box nil))))
-   '(treemacs-root-face ((t (:bold t :underline nil))))
-   '(lsp-face-semhl-definition ((t :inherit font-lock-function-name-face)))
-   '(lsp-face-semhl-implementation ((t :inherit font-lock-function-name-face)))
-   '(lsp-face-semhl-namespace ((t :inherit font-lock-type-face)))
-   '(lsp-rust-analyzer-reference-modifier-face ((t :inherit lsp-rust-analyzer-reference-modifier-face :bold nil)))
-   '(lsp-rust-analyzer-mutable-modifier-face ((t :inherit lsp-rust-analyzer-reference-modifier-face :underline t))))
-
+  ;; Font
+  (set-face-attribute 'default nil
+                      :font "PragmataPro Mono Liga"
+                      :weight 'normal
+                      :height 130)
   (enable-ligatures)
 
+  ;; Theme
+  (add-to-list 'custom-theme-load-path
+               (expand-file-name "themes" user-emacs-directory))
+
   :hook
-  ((prog-mode . display-line-numbers-mode)
-   ((text-mode prog-mode) . set-line-spacing)))
+  (((text-mode prog-mode) . set-line-spacing)))
 
 (use-package doom-modeline
   :demand t
@@ -64,6 +54,42 @@
   (doom-modeline-icon nil)
   :config
   (doom-modeline-mode 1))
+
+(use-package doom-themes)
+
+(use-package modus-themes
+  :custom
+  (modus-themes-bold-constructs nil)
+  (modus-themes-italic-constructs nil)
+  :config
+  (require-theme 'modus-themes)
+  (setq modus-themes-common-palette-overrides
+        modus-themes-preset-overrides-faint)
+
+  (modus-themes-with-colors
+    (custom-set-faces
+     `(mode-line
+       ((t (:box nil))))
+     `(mode-line-active
+       ((t (:box nil))))
+     `(mode-line-inactive
+       ((t (:box nil))))
+     `(treemacs-root-face
+       ((t (:bold t :underline nil))))
+     `(lsp-face-semhl-definition
+       ((t :inherit font-lock-function-name-face)))
+     `(lsp-face-semhl-implementation
+       ((t :inherit font-lock-function-name-face)))
+     `(lsp-face-semhl-namespace
+       ((t :inherit font-lock-type-face)))
+     `(lsp-rust-analyzer-reference-modifier-face
+       ((t :inherit lsp-rust-analyzer-reference-modifier-face :bold nil)))
+     `(font-lock-variable-name-face
+       ((t :foreground "#000000" :bold nil)))
+     `(lsp-rust-analyzer-mutable-modifier-face
+       ((t :inherit lsp-rust-analyzer-reference-modifier-face :underline t)))))
+
+  (load-theme 'modus-operandi t))
 
 (provide 'ui)
 ;;; ui.el ends here

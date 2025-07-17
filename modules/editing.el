@@ -12,7 +12,7 @@
   (delete-selection-mode 1)
   (setq-default show-trailing-whitespace t)
   :hook
-  (before-save-hook . delete-trailing-whitespace)
+  (before-save . delete-trailing-whitespace)
   :bind
   (("<escape>"      . keyboard-escape-quit)
    ("<s-up>"        . beginning-of-buffer)
@@ -53,8 +53,13 @@
 
 (use-package paredit)
 
+(use-package rainbow-delimiters
+  :defer t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (use-package rainbow-mode
-  :defer t)
+  :defer t
+  :hook ((text-mode prog-mode) . rainbow-mode))
 
 (use-package subword
   :defer t

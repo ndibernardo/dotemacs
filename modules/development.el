@@ -32,17 +32,20 @@
   :custom (lsp-ui-doc-enable nil))
 
 (use-package treemacs
-  :defer t
+  :demand t
   :custom
   (treemacs-filewatch-mode t)
   (treemacs-follow-mode t)
   (treemacs-no-png-images t)
-  (treemacs-text-scale -0.3)
+  (treemacs-text-scale -0.2)
   (treemacs-user-mode-line-format 'none)
   (treemacs-expand-after-init t)
   (treemacs-hide-gitignored-files-mode t)
   :bind (:map treemacs-mode-map
               ([mouse-1] . treemacs-single-click-expand-action)))
+
+(use-package magit
+  :bind ("C-x g" . magit-status))
 
 (provide 'development)
 ;;; development.el ends here
