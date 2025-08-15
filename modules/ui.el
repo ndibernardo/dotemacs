@@ -27,7 +27,7 @@
   (show-paren-mode 1)
   (window-divider-mode 1)
   (menu-bar-mode 0)
-  (fringe-mode '(0 . 0))
+  (fringe-mode '(2 . 0))
   (setq-default fill-column 100)
 
   (let ((font (cl-find-if (lambda (f) (find-font (font-spec :name f)))

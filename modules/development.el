@@ -4,14 +4,6 @@
 
 ;;; Code:
 
-(use-package flycheck
-  :defer t
-  :hook ((prog-mode . flycheck-mode))
-  :custom
-  (flycheck-emacs-lisp-load-path 'inherit))
-
-(use-package flycheck-clj-kondo)
-
 (use-package dap-mode
   :demand t
   :custom
@@ -40,6 +32,26 @@
   (define-key dap-mode-map (kbd "<f12>") 'dap-step-out)
   (define-key dap-mode-map (kbd "<f9>") 'dap-breakpoint-toggle))
 
+(use-package flycheck
+  :defer t
+  :hook ((prog-mode . flycheck-mode))
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit))
+
+(use-package flycheck-clj-kondo)
+
+(use-package git-gutter
+  :diminish
+  :custom
+  (git-gutter:update-interval 0.02)
+  :hook (prog-mode . git-gutter-mode))
+
+(use-package git-gutter-fringe
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+
 (use-package lsp-mode
   :custom
   (lsp-completion-provider :none)
@@ -57,6 +69,10 @@
 (use-package lsp-ui
   :custom (lsp-ui-doc-enable nil))
 
+(use-package magit
+  :bind (("C-x g" . magit-status)
+         ("C-x C-g" . magit-status)))
+
 (use-package treemacs
   :demand t
   :custom
@@ -69,9 +85,6 @@
   (treemacs-hide-gitignored-files-mode t)
   :bind (:map treemacs-mode-map
               ([mouse-1] . treemacs-single-click-expand-action)))
-
-(use-package magit
-  :bind ("C-x g" . magit-status))
 
 (provide 'development)
 ;;; development.el ends here
