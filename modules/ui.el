@@ -27,11 +27,11 @@
   (show-paren-mode 1)
   (window-divider-mode 1)
   (menu-bar-mode 0)
-  (fringe-mode '(2 . 0))
+  (fringe-mode '(10 . 0))
   (setq-default fill-column 100)
 
   (let ((font (cl-find-if (lambda (f) (find-font (font-spec :name f)))
-                          '("Cartograph CF" "Menlo" "Hack" "Input Mono" "TX-02 Medium Condensed"
+                          '("TX-02 Medium" "Cartograph CF" "Menlo" "Hack" "Input Mono"
                             "Fira Code" "PragmataPro Mono Liga" "monospace"))))
   (when font
     (set-face-attribute 'default nil :font font :height 130)))

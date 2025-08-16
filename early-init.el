@@ -37,6 +37,7 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(height . 100) default-frame-alist)
 (push '(width  . 200) default-frame-alist)
+(push '(internal-border-width . 10) default-frame-alist)
 
 (when (featurep 'ns)
   (setq frame-title-format '("%b"))

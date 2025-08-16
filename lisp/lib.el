@@ -9,7 +9,7 @@
 (defun set-line-spacing ()
   "Configure text display properties for better readability."
   (setq-local default-text-properties
-              '(line-spacing 0.20 line-height 1.20)))
+              '(line-spacing 0.10 line-height 1.10)))
 
 (defun select-line ()
   "Select current line.  If region is active, extend selection downward by line.
